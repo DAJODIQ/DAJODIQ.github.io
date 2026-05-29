@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement</title>
+  <style>
+    :root{ --ink:#1a1a1a; --muted:#6b7280; --line:#e5e7eb; --accent:#1f3a8a; }
+    *{ box-sizing:border-box; }
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+      color:var(--ink); line-height:1.7; margin:0;
+      background:#fff;
+    }
+    .wrap{ max-width:780px; margin:0 auto; padding:64px 24px 96px; }
+    h1{
+      font-size:1.9rem; line-height:1.3; font-weight:700;
+      text-align:center; margin:0 0 28px;
+    }
+    .authors{ text-align:center; margin-bottom:8px; }
+    .authors .name{ font-size:1.05rem; color:var(--ink); }
+    .authors .review{ color:var(--muted); font-size:.95rem; margin-top:6px; }
+    hr{ border:none; border-top:1px solid var(--line); margin:40px 0; }
+    h2{
+      font-size:1.05rem; text-transform:uppercase; letter-spacing:.06em;
+      color:var(--accent); margin:0 0 14px;
+    }
+    .abstract{ text-align:justify; }
+    .abstract em, .abstract i{ font-style:italic; }
+    footer{ text-align:center; color:var(--muted); font-size:.85rem; margin-top:64px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Enabling Robust Cloth Manipulation via<br>Inference-Time Simulator-in-the-Loop Refinement</h1>
+
+    <div class="authors">
+      <div class="name">Anonymous Author(s)</div>
+      <div class="review">Paper under double-blind review</div>
+    </div>
+
+    <hr>
+
+    <h2>Abstract</h2>
+    <p class="abstract">
+      <i>Simulator-in-the-loop</i> optimization offers a promising inference-time mechanism for
+      robot manipulation. It uses a physical simulator as a backend rollout engine to evaluate
+      candidate trajectories in parallel and refine nominal actions online, a paradigm proven
+      effective in rigid-body manipulation where state and contact are relatively tractable. We
+      bring this paradigm to real-world cloth manipulation from a single RGB input through three
+      pillars. <i>(i)</i> We design a scalable synthetic-data generation and inference-time rollout
+      pipeline built on <b>FLASH</b>, a deformable-object simulator that provides a practical balance
+      among physical fidelity, numerical stability, and rollout efficiency. <i>(ii)</i> We develop a
+      real-to-sim module, trained purely on synthetic data, that maps a single RGB observation to
+      simulation-compatible cloth state by fusing pretrained visual features with learnable canonical
+      tokens. <i>(iii)</i> We perform online planning by coupling a sparse-mesh rollout backend with
+      prior-guided MPPI, anchored at an offline-distilled policy trajectory, preserving
+      manipulation-relevant deformation and contact while enabling sufficient parallel rollout
+      batches. Real-robot experiments show higher success rates and stronger robustness than
+      baseline methods.
+    </p>
+
+    <footer>
+      Anonymous submission &middot; Under review. Please do not distribute.
+    </footer>
+  </div>
+</body>
+</html>
