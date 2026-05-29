@@ -1,1 +1,0 @@
-# DAJODIQ.github.io
