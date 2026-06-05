@@ -1,2 +1,5 @@
 .DS_store
 .idea
+
+# 大视频不进仓库（超 GitHub 100MB 限制；改用压缩版或外链）
+static/videos/overview.mp4

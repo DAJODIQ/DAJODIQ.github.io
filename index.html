@@ -3,24 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement">
+  <meta name="keywords" content="Deformable Object Manipulation, Simulator-in-the-Loop Optimization, Cloth State Estimation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
+  <title>Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <!-- TODO（可选）: 如需访问统计，填入你自己的 Google Analytics ID 并取消下面注释；不需要就保持删除状态。
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
+    gtag('config', 'YOUR-GA-ID');
   </script>
+  -->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,7 +28,10 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/icon.png">
+
+  <!-- 站点配置：公开实名 / 匿名 切换开关（须在样式之后、尽早执行，避免首屏闪烁） -->
+  <script src="./static/js/config.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -50,36 +49,16 @@
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;"> -->
+      <!-- TODO: 把 href 换成你的项目主页 / 通讯作者主页（匿名版自动隐藏） -->
+      <!-- <a class="navbar-item public-only" href="#">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
       </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
     </div>
-
-  </div>
+  </div> -->
 </nav>
 
 
@@ -88,39 +67,46 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
+          <h1 class="title is-1 publication-title">Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement</h1>
+
+          <!-- ===== 作者：公开实名版 ===== -->
+          <div class="is-size-5 publication-authors public-only">
+            <span class="author-block">Xin Liu<sup>1,2,*</sup>,</span>
+            <span class="author-block">Yulin Li<sup>1,*</sup>,</span>
+            <span class="author-block">Ziming Li<sup>1</sup>,</span>
+            <span class="author-block">Pengyu Jing<sup>1</sup>,</span>
+            <span class="author-block">Zhenhao Huang<sup>1</sup>,</span>
+            <span class="author-block">Bingyang Zhou<sup>1</sup>,</span><br>
+            <span class="author-block">Ziqiu Zeng<sup>1</sup>,</span>
+            <span class="author-block">Siyuan Luo<sup>1</sup>,</span>
+            <span class="author-block">Chenkun Qi<sup>2</sup>,</span>
+            <span class="author-block">Fan Shi<sup>1,&dagger;</sup></span>
+          </div>
+          <div class="is-size-5 publication-authors public-only">
+            <span class="author-block"><sup>1</sup>National University of Singapore,</span>
+            <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
+            <br>
+            <span class="author-block is-size-6"><sup>*</sup>Equal contribution.&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding author.</span>
           </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+          <!-- ===== 作者：匿名版（双盲评审期）===== -->
+          <div class="is-size-5 publication-authors anon-only">
+            <span class="author-block">Anonymous Author(s)</span>
+          </div>
+          <div class="is-size-5 publication-authors anon-only">
+            <span class="author-block">Paper under double-blind review</span>
+          </div>
+
+          <!-- ===== 会议徽标 ===== -->
+          <div class="has-text-centered public-only" style="margin-top: 0.5rem;">
+            <span class="publication-venue">Coference on Robot Learning (CoRL) 2026</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+              <!-- Paper PDF：TODO 换成论文 PDF 或 OpenReview 链接 -->
+              <span class="link-block public-only">
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -128,8 +114,9 @@
                   <span>Paper</span>
                 </a>
               </span>
+              <!-- arXiv（实名版）：TODO 换成 arXiv abstract 链接 -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -137,111 +124,131 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies"
+              <!-- Code（实名版）：TODO 换成 GitHub 仓库链接 -->
+              <span class="link-block public-only">
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
-                  </a>
+                </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+              <!-- Project Page（匿名版）：指向论文里写的匿名页 -->
+              <!-- <span class="link-block anon-only">
+                <a href="https://anonymous-clothmani.github.io/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="far fa-images"></i>
+                      <i class="fas fa-globe"></i>
                   </span>
-                  <span>Data</span>
-                  </a>
+                  <span>Project Page</span>
+                </a>
+              </span> -->
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
+
+<!-- ===== 首屏讲解视频（约 3 分钟，预留位）===== -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
+      <h2 class="title is-3 has-text-centered">Overview Video</h2>
+      <!-- 默认：本地视频文件。把约 3 分钟的讲解视频放到 static/videos/overview.mp4 即可。
+           视频就绪前，这里会显示 teaser.png 作为封面（poster）；若不想与下方总览图重复，
+           删掉 poster 属性即可。 -->
+      <video controls playsinline width="100%">
+        <source src="./static/videos/overview.mp4" type="video/mp4">
       </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
+      <!-- 备选：改用 YouTube / Bilibili 嵌入时，删掉上面的 <video>，取消下面注释并填 VIDEO_ID
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;showinfo=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      -->
     </div>
   </div>
 </section>
 
 
+<!-- ===== Abstract ===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="floating-card">
+          <h2 class="title is-3 has-text-centered">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              <i>Simulator-in-the-loop</i> optimization offers a promising inference-time mechanism for robot manipulation. It uses a physical simulator as a backend rollout engine to evaluate candidate trajectories in parallel and refine nominal actions online, a paradigm proven effective in rigid-body manipulation where state and contact are relatively tractable. We bring this paradigm to real-world cloth manipulation from a single RGB input through three pillars.
+            </p>
+            <p>
+              <b>(i)</b> We design a scalable synthetic-data generation and inference-time rollout pipeline built on <i>FLASH</i>, a deformable-object simulator that provides a practical balance among physical fidelity, numerical stability, and rollout efficiency. <b>(ii)</b> We develop a real-to-sim module, trained purely on synthetic data, that maps a single RGB observation to simulation-compatible cloth state by fusing pretrained visual features with learnable canonical tokens. <b>(iii)</b> We perform online planning by coupling a sparse-mesh rollout backend with prior-guided MPPI, anchored at an offline-distilled policy trajectory, preserving manipulation-relevant deformation and contact while enabling sufficient parallel rollout batches. Real-robot experiments show higher success rates and stronger robustness than baseline methods.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Framework Overview：系统总览图 ===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Framework</h2>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <img src="./static/images/teaser4.png" alt="System overview" class="section-figure">
+        <p class="figure-caption">
+          <b>Overview of the proposed framework.</b> Offline, we use FLASH to generate synthetic data for real-to-sim training. Online, RGB observations initialize physics rollouts that refine the prior policy through MPPI for closed-loop hardware execution.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Real-Robot Results：视频轮播（由模板 Results 轮播区改造）===== -->
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
+      <h2 class="title is-3 has-text-centered" style="margin-bottom: 1.2rem;">Highlights</h2>
+      <!-- 平铺网格：每行 2 个（is-half）。想每行 3 个改成 is-one-third，每行 4 个改成 is-one-quarter。 -->
+      <div class="columns is-multiline is-centered">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/demo_live.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/demo_bi_towel.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/demo_bi_pant.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/demo_bi_long_sleeve.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/fold_4corner.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
+        <div class="column is-one-third">
+          <video autoplay controls muted loop playsinline class="result-video">
+            <source src="./static/videos/baseline_vmppi.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -250,205 +257,324 @@
 </section>
 
 
+<!-- ===== Method（由模板 Visual Effects 区改造）===== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
+        <h2 class="title is-3 has-text-centered">Method</h2>
         <div class="content has-text-justified">
           <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
+            We build a unified <i>simulator-in-the-loop</i> framework for real-world cloth manipulation.
+            <b>Offline</b>, FLASH generates scalable synthetic cloth-deformation data to train an
+            RGB-native real-to-sim module. <b>Online</b>, a single RGB observation is lifted into a
+            sparse simulation-compatible cloth state that synchronizes a sparse-mesh rollout backend;
+            a prior-guided MPPI controller then refines the nominal policy trajectory through parallel
+            physics rollouts and applies the optimized action in a receding-horizon loop on hardware.
           </p>
         </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
+
+        <div class="columns" style="margin-top: 0.5rem;">
+          <div class="column">
+            <div class="pillar">
+              <h3>① FLASH Simulator Backend</h3>
+              <p>
+                A deformable-object simulator balancing physical fidelity, numerical stability, and rollout efficiency. It represents cloth as a triangular mesh, resolves frictional contact through non-smooth Newton iterations, and reduces computation to GPU-friendly sparse operations — enabling stable parallel rollouts for online control.
+              </p>
             </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
           </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
+          <div class="column">
+            <div class="pillar">
+              <h3>② RGB-native Real-to-Sim</h3>
+              <p>
+                A cloth state estimator trained purely on synthetic data that maps a single RGB image to a simulation-compatible cloth state. It fuses frozen DINOv2 visual features with learnable canonical tokens and an MLP decoder to predict the deformed 3D vertices of the garment mesh.
+              </p>
+            </div>
           </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
+          <div class="column">
+            <div class="pillar">
+              <h3>③ Prior-guided MPPI</h3>
+              <p>
+                An online planner coupling a sparse-mesh rollout backend with MPPI, anchored at an offline-distilled policy trajectory. It preserves manipulation-relevant deformation and contact while keeping enough parallel rollout batches under a real-time control budget.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!--/ Concurrent Work. -->
-
   </div>
 </section>
 
 
+<!-- ===== FLASH Simulator Backend（Method 之后、Real2Sim 之前）===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Simulator Backend</h2>
+    <div class="content has-text-justified">
+      <p>
+        <b>FLASH</b> is a deformable-object simulator: it models cloth as a triangular mesh and
+        resolves frictional contact with non-smooth Newton iterations, reducing the heavy computation
+        to GPU-friendly sparse operations for stable, repeatable rollouts. Under an identical task and
+        MPPI controller, FLASH gives the best accuracy&ndash;fidelity&ndash;speed trade-off across all
+        parallel-environment counts <i>K</i>: <b>95&ndash;100% success</b> with keypoint error and MSE
+        about an order of magnitude lower than the others. The videos below show MPPI
+        diagonal-fold rollouts on the <b>same seed, cost, and cloth asset</b> across the three
+        simulators.
+      </p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Simulator</th><th><i>K</i></th>
+            <th>Step [ms] &darr;</th><th>MPPI [s] &darr;</th>
+            <th>KP err. [cm] &darr;</th><th>MSE [cm&sup2;] &darr;</th>
+            <th>CD [cm] &darr;</th><th>EMD [cm] &darr;</th><th>SR &uarr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="4">Newton</td><td>64</td><td>41.0</td><td>0.85</td><td>8.40 &plusmn; 8.72</td><td>56.8 &plusmn; 73.1</td><td>0.89 &plusmn; 0.71</td><td>1.77 &plusmn; 1.52</td><td>40%</td></tr>
+          <tr><td>128</td><td>55.1</td><td>1.14</td><td>10.28 &plusmn; 11.08</td><td>68.9 &plusmn; 93.7</td><td>0.73 &plusmn; 0.40</td><td>1.52 &plusmn; 1.22</td><td>40%</td></tr>
+          <tr><td>256</td><td>104.3</td><td>2.15</td><td>8.85 &plusmn; 10.71</td><td>58.1 &plusmn; 89.6</td><td>0.77 &plusmn; 0.50</td><td>1.56 &plusmn; 1.36</td><td>60%</td></tr>
+          <tr><td>512</td><td>232.8</td><td>4.80</td><td>13.02 &plusmn; 13.06</td><td>92.3 &plusmn; 105.3</td><td>0.91 &plusmn; 0.62</td><td>1.97 &plusmn; 1.60</td><td>35%</td></tr>
+          <tr><td rowspan="4">Isaac Sim</td><td>64</td><td><b>11.7</b></td><td><b>0.26</b></td><td>9.78 &plusmn; 10.74</td><td>60.5 &plusmn; 104.4</td><td>0.63 &plusmn; 0.36</td><td>1.47 &plusmn; 1.07</td><td>55%</td></tr>
+          <tr><td>128</td><td><b>22.2</b></td><td><b>0.50</b></td><td>10.88 &plusmn; 11.13</td><td>67.4 &plusmn; 108.0</td><td>0.66 &plusmn; 0.33</td><td>1.56 &plusmn; 1.03</td><td>45%</td></tr>
+          <tr><td>256</td><td><b>41.1</b></td><td><b>0.92</b></td><td>7.09 &plusmn; 5.60</td><td>32.4 &plusmn; 47.6</td><td><b>0.55 &plusmn; 0.15</b></td><td>1.16 &plusmn; 0.55</td><td>55%</td></tr>
+          <tr><td>512</td><td><b>80.7</b></td><td><b>1.79</b></td><td>5.84 &plusmn; 4.73</td><td>24.6 &plusmn; 32.8</td><td><b>0.54 &plusmn; 0.11</b></td><td>1.18 &plusmn; 0.41</td><td>60%</td></tr>
+          <tr class="ours"><td rowspan="4">FLASH</td><td>64</td><td>19.4</td><td>0.40</td><td><b>1.61 &plusmn; 1.18</b></td><td><b>3.7 &plusmn; 4.3</b></td><td><b>0.53 &plusmn; 0.42</b></td><td><b>0.92 &plusmn; 1.22</b></td><td><b>100%</b></td></tr>
+          <tr class="ours"><td>128</td><td>36.0</td><td>0.75</td><td><b>1.54 &plusmn; 0.88</b></td><td><b>3.1 &plusmn; 1.9</b></td><td><b>0.44 &plusmn; 0.08</b></td><td><b>0.66 &plusmn; 0.27</b></td><td><b>100%</b></td></tr>
+          <tr class="ours"><td>256</td><td>68.9</td><td>1.42</td><td><b>1.95 &plusmn; 1.82</b></td><td><b>5.5 &plusmn; 11.0</b></td><td>0.56 &plusmn; 0.34</td><td><b>1.02 &plusmn; 1.15</b></td><td><b>95%</b></td></tr>
+          <tr class="ours"><td>512</td><td>137.3</td><td>2.84</td><td><b>2.08 &plusmn; 1.93</b></td><td><b>3.9 &plusmn; 3.2</b></td><td>0.58 &plusmn; 0.59</td><td><b>1.02 &plusmn; 1.52</b></td><td><b>95%</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figure-caption has-text-centered">
+      Simulator backend evaluation under the same cloth-manipulation task and MPPI controller.
+      <b>Step</b> / <b>MPPI</b>: wall-clock per dynamics step / per rollout batch;
+      <b>KP err.</b>: keypoint alignment error; <b>SR</b>: success rate. Bold marks the best per column.
+    </p>
+
+    <!-- 仿真器对比 rollout：每行一个 K，三个仿真器同 seed / 同 cost / 同 cloth，FLASH 在最左。
+         换其它 case 只需改 src 里的 K*_seed* 目录与 caption 的 KP err（数据见该目录 README.txt）。 -->
+    <h3 class="title is-5 has-text-centered" style="margin-top:1.5rem; margin-bottom:0.25rem;">
+      Same-condition rollout comparison
+    </h3>
+    <!-- <p class="figure-caption has-text-centered" style="margin-bottom:1rem;">
+      Vanilla-MPPI diagonal fold under identical seed / cost / cloth asset.
+      KP err. = settled pick-to-target corner distance (lower is better).
+    </p> -->
+
+    <!-- K = 64 -->
+    <h3 class="title is-6 has-text-centered" style="margin-bottom:0.4rem;">K = 64</h3>
+    <div class="columns is-centered" style="margin-bottom:0.5rem;">
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K64_seed949/flash.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered"><b>FLASH</b> &mdash; KP err. <b>1.27 cm</b></p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K64_seed949/isaac_lab.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Isaac Sim &mdash; KP err. 5.58 cm</p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K64_seed949/newton.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Newton &mdash; KP err. 18.61 cm</p>
+      </div>
+    </div>
+
+    <!-- K = 256 -->
+    <h3 class="title is-6 has-text-centered" style="margin-bottom:0.4rem;">K = 256</h3>
+    <div class="columns is-centered" style="margin-bottom:0.5rem;">
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K256_seed1741/flash.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered"><b>FLASH</b> &mdash; KP err. <b>1.49 cm</b></p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K256_seed1741/isaac_lab.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Isaac Sim &mdash; KP err. 15.56 cm</p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K256_seed1741/newton.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Newton &mdash; KP err. 30.85 cm</p>
+      </div>
+    </div>
+
+    <!-- K = 512 -->
+    <h3 class="title is-6 has-text-centered" style="margin-bottom:0.4rem;">K = 512</h3>
+    <div class="columns is-centered" style="margin-bottom:0.5rem;">
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K512_seed6513/flash.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered"><b>FLASH</b> &mdash; KP err. <b>0.80 cm</b></p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K512_seed6513/isaac_lab.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Isaac Sim &mdash; KP err. 19.56 cm</p>
+      </div>
+      <div class="column is-one-third">
+        <video autoplay controls muted loop playsinline class="result-video">
+          <source src="./static/videos/mppi_sim_fold_demos/K512_seed6513/newton.mp4" type="video/mp4">
+        </video>
+        <p class="figure-caption has-text-centered">Newton &mdash; KP err. 31.75 cm</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== RGB-native Real-to-Sim（Simulator Backbone 之后）===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">RGB-native Real-to-Sim</h2>
+    <div class="content has-text-justified">
+      <p>
+        Our real-to-sim module recovers a simulation-compatible cloth state from a <b>single RGB
+        image</b>. A frozen <b>DINOv2</b> encoder extracts dense patch features; <b><i>N</i> learnable
+        canonical tokens</b> (one per mesh vertex) aggregate visual evidence and exchange structural
+        context through self-attention, and a shared decoder maps each token to its deformed 3D vertex
+        position. Trained <b>purely on synthetic FLASH data</b> with image- and latent-level
+        augmentation (including random grasping-point masking), it bridges the sim-to-real visual gap
+        without any real-world annotation.
+      </p>
+      <p>
+        Against a point-cloud diffusion estimator (DPM, from UniClothDiff) and a depth-based variant
+        (DeFM), our module attains the <b>lowest reconstruction error on every metric</b> and the
+        <b>fastest inference</b> &mdash; about 7&ndash;12&nbsp;ms per frame versus 300&ndash;500&nbsp;ms
+        for the diffusion baseline.
+      </p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Asset</th><th>Real-to-Sim</th>
+            <th>MSE [mm&sup2;] &darr;</th><th>CD [mm] &darr;</th>
+            <th>EMD [mm] &darr;</th><th>Latency [ms] &darr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ours"><td rowspan="3">Towel</td><td><b>Ours (RGB)</b></td><td><b>2.33 &plusmn; 1.21</b></td><td><b>1.94 &plusmn; 0.41</b></td><td><b>1.98 &plusmn; 0.45</b></td><td><b>7.4 &plusmn; 0.6</b></td></tr>
+          <tr><td>DPM</td><td>7.17 &plusmn; 2.22</td><td>3.89 &plusmn; 0.67</td><td>4.01 &plusmn; 0.72</td><td>318.5 &plusmn; 3.7</td></tr>
+          <tr><td>DeFM</td><td>43.36 &plusmn; 34.66</td><td>5.51 &plusmn; 0.99</td><td>6.53 &plusmn; 1.52</td><td>12.6 &plusmn; 0.5</td></tr>
+          <tr class="ours"><td rowspan="3">Long-sleeve Shirt</td><td><b>Ours (RGB)</b></td><td><b>24.23 &plusmn; 11.49</b></td><td><b>3.65 &plusmn; 0.78</b></td><td><b>4.67 &plusmn; 1.24</b></td><td><b>12.4 &plusmn; 0.4</b></td></tr>
+          <tr><td>DPM</td><td>45.74 &plusmn; 14.19</td><td>5.93 &plusmn; 0.27</td><td>8.21 &plusmn; 0.65</td><td>512.9 &plusmn; 6.0</td></tr>
+          <tr><td>DeFM</td><td>43.52 &plusmn; 22.02</td><td>4.05 &plusmn; 0.38</td><td>5.93 &plusmn; 0.91</td><td>18.0 &plusmn; 0.6</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figure-caption has-text-centered">
+      State-estimation comparison: per-vertex MSE, Chamfer Distance, Earth Mover's Distance, and
+      single-frame inference latency on the validation split. Best per column in bold.
+    </p>
+
+    <div class="has-text-centered" style="margin-top:1.5rem;">
+      <img src="./static/images/Real2Sim_reconstruction_overlay3.png" class="section-figure" alt="Real-to-sim reconstruction">
+      <p class="figure-caption">
+        Real-world real-to-sim reconstruction on (a) towel and (b) long-sleeve top: from top to bottom,
+        the real observation, predicted vertices overlaid on the image, and the reconstructed cloth.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Prior-guided MPPI Refinement ===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Prior-guided MPPI Refinement</h2>
+    <div class="content has-text-justified">
+      <p>
+        A base policy proposes a nominal action sequence that serves as a <b>task-level prior</b>. At
+        each step we sample <i>K</i> candidate sequences around it, roll them out in FLASH from the
+        synchronized cloth state, and score each by a folding cost with workspace, table-penetration,
+        and smoothness terms. MPPI turns the costs into softmax weights (temperature &lambda;) and
+        returns a refined sequence; the robot executes only its <b>first action</b>, re-observes, and
+        repeats the real-to-sim-to-real loop in a <b>receding-horizon</b> manner &mdash; continuously
+        correcting the prior from online physics inference and recovering from local execution errors.
+      </p>
+      <p>
+        On real hardware, the full pipeline (RGB real-to-sim + FLASH + prior-guided MPPI) reaches
+        <b>9/10</b> on single-arm diagonal folding and <b>8/10</b> on dual-arm symmetric folding, far
+        above direct base-policy execution (3/10 and 1/10). Replacing any single component &mdash; the
+        estimator, the simulator, or the online refinement &mdash; degrades the whole loop.
+      </p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Task</th><th>Real-to-Sim</th><th>Backend</th><th>Controller</th><th>Real SR &uarr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ours"><td rowspan="4">Single-arm diagonal</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>9/10</b></td></tr>
+          <tr><td>DPM</td><td>FLASH</td><td>MPPI</td><td>6/10</td></tr>
+          <tr><td>Ours (RGB)</td><td>Isaac Sim</td><td>MPPI</td><td>5/10</td></tr>
+          <tr><td>Ours (RGB)</td><td>FLASH</td><td>Base-policy</td><td>3/10</td></tr>
+          <tr class="ours"><td rowspan="4">Dual-arm symmetric</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>8/10</b></td></tr>
+          <tr><td>DPM</td><td>FLASH</td><td>MPPI</td><td>3/10</td></tr>
+          <tr><td>Ours (RGB)</td><td>Isaac Sim</td><td>MPPI</td><td>4/10</td></tr>
+          <tr><td>Ours (RGB)</td><td>FLASH</td><td>Base-policy</td><td>1/10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figure-caption has-text-centered">
+      Real-world pipeline-variant evaluation: each row replaces one component of the full pipeline
+      (first row). Success = all target corner pairs aligned within 2&nbsp;cm.
+    </p>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered">
+      <img src="./static/images/realworld_grid.png" class="section-figure" alt="Real-world folding grid">
+      <p class="figure-caption">
+        Real-world cloth folding across diverse garments and initial configurations, executed by our
+        closed-loop simulator-in-the-loop controller.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ===== BibTeX ===== -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <!-- 实名版引用 -->
+    <pre class="public-only"><code>@inproceedings{liu2026cloth,
+  title     = {Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement},
+  author    = {Liu, Xin and Li, Yulin and Li, Ziming and Jing, Pengyu and Huang, Zhenhao and
+               Zhou, Bingyang and Zeng, Ziqiu and Luo, Siyuan and Qi, Chenkun and Shi, Fan},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026},
+}</code></pre>
+    <!-- 匿名版引用 -->
+    <pre class="anon-only"><code>@inproceedings{anonymous2026cloth,
+  title     = {Enabling Robust Cloth Manipulation via Inference-Time Simulator-in-the-Loop Refinement},
+  author    = {Anonymous},
+  booktitle = {Anonymous},
+  year      = {2026},
+  note      = {Under review},
 }</code></pre>
   </div>
 </section>
@@ -456,29 +582,21 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
+    <!-- <div class="content has-text-centered public-only">
+      <a class="icon-link" href="#">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+      <a class="icon-link" href="#" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
-    </div>
+    </div> -->
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
           <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            The website template is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. We thank the authors
+            for open-sourcing it.
           </p>
         </div>
       </div>

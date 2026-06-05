@@ -127,6 +127,15 @@ body {
   margin: 0;
 }
 
+/* ---- 结果视频平铺网格（Highlights 区）---- */
+.result-video {
+  width: 100%;
+  display: block;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: #000;
+}
+
 
 .interpolation-panel {
   background: #f5f5f5;
@@ -155,3 +164,82 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+
+/* ============================================================================
+ *  以下为 RL_MPPI 项目主页新增样式（在原 Nerfies 模板基础上追加）
+ * ========================================================================== */
+
+/* ---- 公开实名 / 匿名 切换：由 static/js/config.js 给 <html> 加 .anon 类驱动 ---- */
+html.anon .public-only      { display: none !important; }
+html:not(.anon) .anon-only  { display: none !important; }
+
+/* ---- 会议徽标（标题下方的 CoRL 2026） ---- */
+.publication-venue {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.2rem 0.9rem;
+  border-radius: 999px;
+  background: #E6F2FB;
+  color: #2c6fa6;
+  font-weight: bold;
+}
+
+/* ---- 通用：区块大图 ---- */
+.section-figure {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+}
+.figure-caption {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 0.6rem;
+}
+
+/* ---- Method 三支柱卡片 ---- */
+.pillar {
+  background: #f7f9fb;
+  border: 1px solid #e6ecf2;
+  border-radius: 12px;
+  padding: 1.25rem 1.25rem 1rem;
+  height: 100%;
+}
+.pillar h3 {
+  color: hsl(204, 70%, 42%);
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+.pillar p { color: #333; }
+
+/* ---- 主结果对比表 ---- */
+table.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.95rem;
+}
+table.result-table th,
+table.result-table td {
+  border: 1px solid #dde3e9;
+  padding: 8px 10px;
+  text-align: center;
+}
+table.result-table thead th { background: #f0f4f8; }
+table.result-table tr.ours { background: #E6F2FB; font-weight: 600; }
+
+/* ---- 相关工作列表 ---- */
+.related-list p { margin-bottom: 0.4rem; }
+
+/* ---- 白色浮动卡片（用于 Abstract 等区块）---- */
+.floating-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 2rem 2.5rem;
+}
+@media (max-width: 768px) {
+  .floating-card { padding: 1.25rem 1.25rem; }
+}
+
