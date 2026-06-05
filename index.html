@@ -441,19 +441,10 @@
     <h2 class="title is-3 has-text-centered">RGB-native Real-to-Sim</h2>
     <div class="content has-text-justified">
       <p>
-        Our real-to-sim module recovers a simulation-compatible cloth state from a <b>single RGB
-        image</b>. A frozen <b>DINOv2</b> encoder extracts dense patch features; <b><i>N</i> learnable
-        canonical tokens</b> (one per mesh vertex) aggregate visual evidence and exchange structural
-        context through self-attention, and a shared decoder maps each token to its deformed 3D vertex
-        position. Trained <b>purely on synthetic FLASH data</b> with image- and latent-level
-        augmentation (including random grasping-point masking), it bridges the sim-to-real visual gap
-        without any real-world annotation.
+        The real-to-sim module recovers a simulation-compatible cloth state from a <b>single RGB image</b>. A frozen DINOv2 encoder extracts dense patch features; <b><i>N</i> learnable canonical tokens</b> (one per mesh vertex) aggregate visual evidence and exchange structural context through self-attention, and a shared decoder maps each token to its deformed 3D vertex position. Trained <b>purely on synthetic RGB data</b> with image- and latent-level augmentation (including random grasping-point masking), it bridges the sim-to-real visual gap without any real-world annotation.
       </p>
       <p>
-        Against a point-cloud diffusion estimator (DPM, from UniClothDiff) and a depth-based variant
-        (DeFM), our module attains the <b>lowest reconstruction error on every metric</b> and the
-        <b>fastest inference</b> &mdash; about 7&ndash;12&nbsp;ms per frame versus 300&ndash;500&nbsp;ms
-        for the diffusion baseline.
+        Against a point-cloud diffusion estimator (DPM) and a depth-based variant (DeFM), the RGB-native module attains the <b>lowest reconstruction error on every metric</b> and the <b>fastest inference</b> &mdash; about 7&ndash;12&nbsp;ms per frame versus 300&ndash;500&nbsp;ms for the diffusion baseline.
       </p>
     </div>
 
@@ -467,10 +458,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="ours"><td rowspan="3">Towel</td><td><b>Ours (RGB)</b></td><td><b>2.33 &plusmn; 1.21</b></td><td><b>1.94 &plusmn; 0.41</b></td><td><b>1.98 &plusmn; 0.45</b></td><td><b>7.4 &plusmn; 0.6</b></td></tr>
+          <tr class="ours"><td rowspan="3" style="background:#fff;">Towel</td><td><b>Ours (RGB)</b></td><td><b>2.33 &plusmn; 1.21</b></td><td><b>1.94 &plusmn; 0.41</b></td><td><b>1.98 &plusmn; 0.45</b></td><td><b>7.4 &plusmn; 0.6</b></td></tr>
           <tr><td>DPM</td><td>7.17 &plusmn; 2.22</td><td>3.89 &plusmn; 0.67</td><td>4.01 &plusmn; 0.72</td><td>318.5 &plusmn; 3.7</td></tr>
           <tr><td>DeFM</td><td>43.36 &plusmn; 34.66</td><td>5.51 &plusmn; 0.99</td><td>6.53 &plusmn; 1.52</td><td>12.6 &plusmn; 0.5</td></tr>
-          <tr class="ours"><td rowspan="3">Long-sleeve Shirt</td><td><b>Ours (RGB)</b></td><td><b>24.23 &plusmn; 11.49</b></td><td><b>3.65 &plusmn; 0.78</b></td><td><b>4.67 &plusmn; 1.24</b></td><td><b>12.4 &plusmn; 0.4</b></td></tr>
+          <tr class="ours"><td rowspan="3" style="background:#fff;">Long-sleeve Shirt</td><td><b>Ours (RGB)</b></td><td><b>24.23 &plusmn; 11.49</b></td><td><b>3.65 &plusmn; 0.78</b></td><td><b>4.67 &plusmn; 1.24</b></td><td><b>12.4 &plusmn; 0.4</b></td></tr>
           <tr><td>DPM</td><td>45.74 &plusmn; 14.19</td><td>5.93 &plusmn; 0.27</td><td>8.21 &plusmn; 0.65</td><td>512.9 &plusmn; 6.0</td></tr>
           <tr><td>DeFM</td><td>43.52 &plusmn; 22.02</td><td>4.05 &plusmn; 0.38</td><td>5.93 &plusmn; 0.91</td><td>18.0 &plusmn; 0.6</td></tr>
         </tbody>
@@ -495,22 +486,15 @@
 <!-- ===== Prior-guided MPPI Refinement ===== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Prior-guided MPPI Refinement</h2>
+    <h2 class="title is-3 has-text-centered">Real-World Evaluation</h2>
     <div class="content has-text-justified">
       <p>
-        A base policy proposes a nominal action sequence that serves as a <b>task-level prior</b>. At
-        each step we sample <i>K</i> candidate sequences around it, roll them out in FLASH from the
-        synchronized cloth state, and score each by a folding cost with workspace, table-penetration,
-        and smoothness terms. MPPI turns the costs into softmax weights (temperature &lambda;) and
-        returns a refined sequence; the robot executes only its <b>first action</b>, re-observes, and
-        repeats the real-to-sim-to-real loop in a <b>receding-horizon</b> manner &mdash; continuously
-        correcting the prior from online physics inference and recovering from local execution errors.
-      </p>
-      <p>
-        On real hardware, the full pipeline (RGB real-to-sim + FLASH + prior-guided MPPI) reaches
-        <b>9/10</b> on single-arm diagonal folding and <b>8/10</b> on dual-arm symmetric folding, far
-        above direct base-policy execution (3/10 and 1/10). Replacing any single component &mdash; the
-        estimator, the simulator, or the online refinement &mdash; degrades the whole loop.
+        A base policy provides a nominal action sequence as a <b>task-level prior</b>; at each step we
+        sample <i>K</i> candidates around it, roll them out in FLASH, and let MPPI reweight them into a
+        refined sequence, executing only the <b>first action</b> in a <b>receding-horizon</b> loop. On
+        real hardware the full pipeline reaches <b>9/10</b> and <b>8/10</b> on single- and dual-arm
+        folding, far above base-policy execution (3/10, 1/10), and replacing any single component
+        degrades the whole loop.
       </p>
     </div>
 
@@ -522,11 +506,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="ours"><td rowspan="4">Single-arm diagonal</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>9/10</b></td></tr>
+          <tr class="ours"><td rowspan="4" style="background:#fff;">Single-arm diagonal</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>9/10</b></td></tr>
           <tr><td>DPM</td><td>FLASH</td><td>MPPI</td><td>6/10</td></tr>
           <tr><td>Ours (RGB)</td><td>Isaac Sim</td><td>MPPI</td><td>5/10</td></tr>
           <tr><td>Ours (RGB)</td><td>FLASH</td><td>Base-policy</td><td>3/10</td></tr>
-          <tr class="ours"><td rowspan="4">Dual-arm symmetric</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>8/10</b></td></tr>
+          <tr class="ours"><td rowspan="4" style="background:#fff;">Dual-arm symmetric</td><td><b>Ours (RGB)</b></td><td><b>FLASH</b></td><td><b>MPPI</b></td><td><b>8/10</b></td></tr>
           <tr><td>DPM</td><td>FLASH</td><td>MPPI</td><td>3/10</td></tr>
           <tr><td>Ours (RGB)</td><td>Isaac Sim</td><td>MPPI</td><td>4/10</td></tr>
           <tr><td>Ours (RGB)</td><td>FLASH</td><td>Base-policy</td><td>1/10</td></tr>
@@ -542,9 +526,9 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="has-text-centered">
-      <img src="./static/images/realworld_grid.png" class="section-figure" alt="Real-world folding grid">
+      <img src="./static/images/generalization_results.png" class="section-figure" alt="Real-world folding grid">
       <p class="figure-caption">
-        Real-world cloth folding across diverse garments and initial configurations, executed by our
+        Real-world cloth folding across diverse garments and initial configurations, executed by the
         closed-loop simulator-in-the-loop controller.
       </p>
     </div>
