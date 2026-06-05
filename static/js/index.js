@@ -17,4 +17,11 @@ $(document).ready(function() {
         autoplaySpeed: 3000,
     };
     bulmaCarousel.attach('.carousel', carouselOptions);
+
+    // 仅在公开实名版注入 YouTube iframe 的 src；匿名盲审版完全不向 YouTube 发请求，避免账号暴露作者
+    if (!(window.SITE_CONFIG && window.SITE_CONFIG.anonymous)) {
+      document.querySelectorAll('iframe[data-src]').forEach(function (f) {
+        f.src = f.getAttribute('data-src');
+      });
+    }
 });

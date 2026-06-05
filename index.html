@@ -154,24 +154,22 @@
 </section>
 
 
-<!-- ===== 首屏讲解视频（约 3 分钟，预留位）===== -->
-<section class="hero teaser">
+<!-- ===== 首屏讲解视频（YouTube 嵌入）===== -->
+<section class="section">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h2 class="title is-3 has-text-centered">Overview Video</h2>
-      <!-- 默认：本地视频文件。把约 3 分钟的讲解视频放到 static/videos/overview.mp4 即可。
-           视频就绪前，这里会显示 teaser.png 作为封面（poster）；若不想与下方总览图重复，
-           删掉 poster 属性即可。 -->
-      <video controls playsinline width="100%">
-        <source src="./static/videos/overview.mp4" type="video/mp4">
-      </video>
-      <!-- 备选：改用 YouTube / Bilibili 嵌入时，删掉上面的 <video>，取消下面注释并填 VIDEO_ID
-      <div class="publication-video">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;showinfo=0"
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-      -->
-    </div>
+    <h2 class="title is-3 has-text-centered">Overview Video</h2>
+    <!-- 公开实名版：YouTube 外链。注意用的是 data-src（不是 src）——只有 anonymous=false 时
+         index.js 才会把它注入 src 并加载，这样匿名版根本不会向 YouTube 发请求，避免账号暴露作者。 -->
+    <iframe class="public-only" data-src="https://www.youtube.com/embed/W0wdy6EdwIc?rel=0&amp;showinfo=0"
+            style="display:block; width:100%; aspect-ratio:16/9; border:0; border-radius:10px; margin-top:1rem;"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <!-- 匿名盲审版：本地视频占位。把压缩后的讲解视频放到 static/videos/overview.mp4（务必 <100MB），
+         并从 .gitignore 删掉 overview.mp4 那一行后再提交，盲审版才能在线上播放。 -->
+    <video class="anon-only" controls playsinline preload="metadata"
+           style="display:block; width:100%; aspect-ratio:16/9; border-radius:10px; margin-top:1rem; background:#000;">
+      <!-- 末尾的 #t=0.1 让浏览器定位到第 0.1 秒并把该帧作为封面（视频首帧），而不是黑屏 -->
+      <source src="./static/videos/overview_small.mp4#t=0.1" type="video/mp4">
+    </video>
   </div>
 </section>
 
